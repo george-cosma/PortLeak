@@ -473,3 +473,4 @@ MonoBehaviour:
   WindowLabel: {fileID: 3861984329171080055}
   Title: Debug.exe
   Focused: 0
+  LinkedBarTask: {fileID: 0}

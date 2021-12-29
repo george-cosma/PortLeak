@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 6386932995192639327}
   - component: {fileID: 6386932995192639320}
   - component: {fileID: 6386932995192639321}
+  - component: {fileID: 326127175990521608}
   m_Layer: 5
   m_Name: Brut3F0rc3_BarTask
   m_TagString: Untagged
@@ -223,6 +224,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &326127175990521608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386932995192639323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e177a2517d8f3c47adae032da02b5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlashInterval: 0.5
+  LinkedWindow: {fileID: 0}
 --- !u!1 &6386932995368150223
 GameObject:
   m_ObjectHideFlags: 0

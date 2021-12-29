@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6732329155728191265}
   - component: {fileID: 6732329155728191270}
   - component: {fileID: 6732329155728191271}
+  - component: {fileID: 8400893099074423240}
   m_Layer: 5
   m_Name: Tetrix_BarTask
   m_TagString: Untagged
@@ -126,6 +127,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &8400893099074423240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732329155728191269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e177a2517d8f3c47adae032da02b5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlashInterval: 0.5
+  LinkedWindow: {fileID: 0}
 --- !u!1 &6732329156286040753
 GameObject:
   m_ObjectHideFlags: 0

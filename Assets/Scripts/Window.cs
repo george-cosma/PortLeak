@@ -8,15 +8,16 @@ using UnityEngine.UI;
 
 public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
-	protected RectTransform m_Canvas_RectTransform;
-	protected RectTransform m_Bar_RectTransform;
-	protected RectTransform m_RectTransform;
-
     public Button ExitButton;
     public TMP_Text WindowLabel;
     public string Title = "No Title!";
     public bool Focused = false;
-	public BarTask Task;
+	
+	public BarTask LinkedBarTask;
+
+	protected RectTransform m_Canvas_RectTransform;
+	protected RectTransform m_Bar_RectTransform;
+	protected RectTransform m_RectTransform;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -27,22 +28,33 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 		m_RectTransform = GetComponent<RectTransform>();
         WindowLabel.SetText(Title);
         ExitButton.onClick.AddListener(TryExit);
-
-		RequestFocus();
     }
 
 	protected virtual void Update() { }
 
 	public virtual void TryExit()
 	{
+		Destroy(LinkedBarTask.gameObject);
         Destroy(this.gameObject);
 	}
 
 	public virtual void OnDrag(PointerEventData eventData)
 	{
+		OnPointerDown(eventData);
 		if(eventData.selectedObject != null) return;
 
-		var newPosition = m_RectTransform.anchoredPosition + eventData.delta;
+
+		// x pixel delta ...... ScreenHeight
+		// y pixel delta ...... canvasHeight
+		// y = canvasHeight * x / ScreenHeight
+
+		var delta = new Vector2(
+			x: eventData.delta.x * m_Canvas_RectTransform.rect.width / Screen.width,
+			y: eventData.delta.y * m_Canvas_RectTransform.rect.height / Screen.height
+		);
+
+
+		var newPosition = m_RectTransform.anchoredPosition + delta;
 		Vector2 bottomLeft = new Vector2(0,0);
 		Vector2 topRight = new Vector2(m_RectTransform.rect.width, m_RectTransform.rect.height);
 
@@ -55,16 +67,20 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 		m_RectTransform.anchoredPosition = newPosition;
 	}
 
-	public virtual void OnPointerDown(PointerEventData eventData) => BringToFocus();
+	public virtual void OnPointerDown(PointerEventData eventData)
+	{
+		BringToFocus();
+		LinkedBarTask?.FocusRecieved();
+	}
 
 	public void RequestFocus()
 	{
-		Task?.RequestFocus();
+		LinkedBarTask?.RequestFocus();
 	}
 
 	public void BringToFocus()
 	{
-		// WindowManager.AnnounceNewFocus(this);
+		WindowManager.instance.AnnounceNewFocus(this);
 		Focused = true;
 	}
 }

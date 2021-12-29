@@ -7,22 +7,23 @@ using UnityEngine.UI;
 
 public class BarTask : MonoBehaviour, IPointerClickHandler
 {
-    public Color FlashColor { get; private set; } = new Color(255f/255, 234f/255, 71f/255);
+    public Color FlashColor { get; private set; } = new Color(215f / 255, 242f / 255, 0f / 255);
     public Color DefaultColor { get; private set; }
 
     public bool Flashing { get; private set; } = false;
-    public float FlashInterval = 5;
+    public float FlashInterval = 0.5f;
 
-    public Window window;
-    public Image icon;
+    public Window LinkedWindow;
 
     private FlashState m_flashState = FlashState.INACTIVE;
     private float m_flashTimer = 0;
+    protected Image m_Image;
 
     // Start is called before the first frame update
     void Start()
     {
-        DefaultColor = icon.color;
+        m_Image = GetComponent<Image>();
+        DefaultColor = m_Image.color;
     }
 
     // Update is called once per frame
@@ -37,14 +38,14 @@ public class BarTask : MonoBehaviour, IPointerClickHandler
             if(Flashing && m_flashState == FlashState.INACTIVE)
 			{
                 m_flashState = FlashState.ACTIVE;
-                icon.color = FlashColor;
+                m_Image.color = FlashColor;
 
                 m_flashTimer = 0;
 			}
             else if(m_flashState == FlashState.ACTIVE)
 			{
                 m_flashState = FlashState.INACTIVE;
-                icon.color = DefaultColor;
+                m_Image.color = DefaultColor;
 
                 m_flashTimer = 0; 
             }
@@ -58,7 +59,7 @@ public class BarTask : MonoBehaviour, IPointerClickHandler
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		FocusRecieved();
-        window.BringToFocus();
+        LinkedWindow?.BringToFocus();
 	}
 }
 
