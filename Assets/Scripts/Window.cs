@@ -8,17 +8,18 @@ using UnityEngine.UI;
 
 public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
-	private RectTransform m_Canvas_RectTransform;
-	private RectTransform m_Bar_RectTransform;
-	private RectTransform m_RectTransform;
+	protected RectTransform m_Canvas_RectTransform;
+	protected RectTransform m_Bar_RectTransform;
+	protected RectTransform m_RectTransform;
+
     public Button ExitButton;
     public TMP_Text WindowLabel;
     public string Title = "No Title!";
     public bool Focused = false;
-	// public BarTask Task;
+	public BarTask Task;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
 		m_Canvas_RectTransform = GameObject.FindGameObjectWithTag("Canvas").GetComponent<RectTransform>();
 		m_Bar_RectTransform = GameObject.FindGameObjectWithTag("Bar").GetComponent<RectTransform>();
@@ -26,7 +27,11 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 		m_RectTransform = GetComponent<RectTransform>();
         WindowLabel.SetText(Title);
         ExitButton.onClick.AddListener(TryExit);
+
+		RequestFocus();
     }
+
+	protected virtual void Update() { }
 
 	public virtual void TryExit()
 	{
@@ -50,14 +55,16 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 		m_RectTransform.anchoredPosition = newPosition;
 	}
 
-	public virtual void OnPointerDown(PointerEventData eventData)
-	{
-		// WindowManager.AnnounceNewFocus(this);
-		Focused = true;
-	}
+	public virtual void OnPointerDown(PointerEventData eventData) => BringToFocus();
 
 	public void RequestFocus()
 	{
-		// Task.RequestFocus();
+		Task?.RequestFocus();
+	}
+
+	public void BringToFocus()
+	{
+		// WindowManager.AnnounceNewFocus(this);
+		Focused = true;
 	}
 }
