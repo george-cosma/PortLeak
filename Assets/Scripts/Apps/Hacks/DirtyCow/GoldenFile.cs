@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,11 @@ using UnityEngine.EventSystems;
 
 public class GoldenFile : GenericFloater, IPointerClickHandler
 {
-	public DirtyCowApp app;
+	public event Action OnClick;
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		app.ChallengeComplete();
+		OnClick?.Invoke();
 		Destroy(this.gameObject);
 	}
 }

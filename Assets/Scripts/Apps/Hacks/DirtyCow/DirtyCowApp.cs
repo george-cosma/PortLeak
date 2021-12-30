@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DirtyCowApp : MonoBehaviour
+public class DirtyCowApp : Hack
 {
-    [SerializeField]
-    protected Window LinkedWindow;
 
+	// === Loading Objects ===
+	[Header("Loading Objects")]
 	[SerializeField]
-	protected GameObject LoadingObjectsHolder;
-	[SerializeField]
-	protected GameObject ChallengeObjectsHolder;
+	protected Slider LoadingBar;
 
 	// === Challenge Objects ===
-
+	[Header("Challenge Objects")]
 	[SerializeField]
 	protected RectTransform FloatersParent;
     [SerializeField]
@@ -22,13 +20,9 @@ public class DirtyCowApp : MonoBehaviour
     [SerializeField]
 	protected RectTransform DespawnPoint;
 
-	// === Loading Objects ===
-
-	[SerializeField]
-	protected Slider LoadingBar;
-
 	// === === ===
 
+	[Header("Prefabs")]
 	[SerializeField]
 	protected  GameObject FilePrefab;
     [SerializeField]
@@ -36,75 +30,24 @@ public class DirtyCowApp : MonoBehaviour
     [SerializeField]
 	protected  GameObject FolderPrefab;
 
+	// === Challenge Variables===
 
-    public HackState hackState = HackState.LOADING;
-
-
-
-	// === Challenge ===
-
-	private bool m_challengeDone = false;
-
-    public float spawnInterval = 0.3f;
+	[Header("Dirty Cow Variables")]
+	public float spawnInterval = 0.75f;
     private float m_spawnTimer = 0;
 
+    public int forceSpawnTreshold = 12;
     private int spawnedFloaters = 0;
-    public int forceSpawnTreshold = 20;
 
-	// === Loading ===
-
-	public float totalLoadTime = 15f;
-	public float currentLoadTime = 0f;
-
-	void Start()
+	
+	protected override void DoLoadingState()
 	{
-		LoadingObjectsHolder.SetActive(true);
-		ChallengeObjectsHolder.SetActive(false);
+		base.DoLoadingState();
+
+		LoadingBar.value = currentLoadTime / totalLoadTime;
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (hackState == HackState.LOADING)
-		{
-			DoLoading();
-
-			if(!m_challengeDone && currentLoadTime >= totalLoadTime/2 )
-			{
-				hackState = HackState.CHALLENGE;
-				LoadingObjectsHolder.SetActive(false);
-				ChallengeObjectsHolder.SetActive(true);
-				LinkedWindow.RequestFocus();
-			}
-		}
-		else if (hackState == HackState.CHALLENGE)
-		{
-			DoChallenge();
-		}
-	}
-
-	public void ChallengeComplete()
-	{
-		hackState = HackState.LOADING;
-		LoadingObjectsHolder.SetActive(true);
-		ChallengeObjectsHolder.SetActive(false);
-		m_challengeDone = true;
-	}
-
-	private void DoLoading()
-	{
-		if (currentLoadTime < totalLoadTime)
-		{
-			currentLoadTime += Time.deltaTime;
-			LoadingBar.value = currentLoadTime / totalLoadTime;
-		}
-		else
-		{
-			DoSuccess();
-		}
-	}
-
-	private void DoChallenge()
+	protected override void DoChallengeState()
 	{
 		if (m_spawnTimer < spawnInterval)
 		{
@@ -113,37 +56,26 @@ public class DirtyCowApp : MonoBehaviour
 		else
 		{
 			m_spawnTimer = 0;
-			if (spawnedFloaters > forceSpawnTreshold)
-			{
-				InstantiateFloater(GoldenFilePrefab);
-				spawnedFloaters = 0;
-				return;
-			}
-
 			int randValue = Random.Range(1, 100);
-			if (randValue <= 60)
+			if (randValue > 95 || spawnedFloaters > forceSpawnTreshold)
 			{
-				InstantiateFloater(FilePrefab);
-				spawnedFloaters++;
+				var goldenFile = InstantiateFloater(GoldenFilePrefab);
+				goldenFile.GetComponent<GoldenFile>().OnClick += () => ChallengeSuccess();
+
+				spawnedFloaters = 0;
 			}
-			else if (randValue <= 95)
+			else if (randValue > 60)
 			{
 				InstantiateFloater(FolderPrefab);
 				spawnedFloaters++;
 			}
 			else
 			{
-				var goldenFile = InstantiateFloater(GoldenFilePrefab);
-				goldenFile.GetComponent<GoldenFile>().app = this;
-				spawnedFloaters = 0;
+				InstantiateFloater(FilePrefab);
+				spawnedFloaters++;
 			}
 
 		}
-	}
-
-	private void DoSuccess()
-	{
-		throw new System.NotImplementedException();
 	}
 
 	private GameObject InstantiateFloater(GameObject prefab)

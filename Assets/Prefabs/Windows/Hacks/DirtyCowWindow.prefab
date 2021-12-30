@@ -949,15 +949,19 @@ MonoBehaviour:
   LinkedWindow: {fileID: 6297617621112540174}
   LoadingObjectsHolder: {fileID: 5173342977241615376}
   ChallengeObjectsHolder: {fileID: 7668805246068839974}
+  hackState: 0
+  totalLoadTime: 15
+  currentLoadTime: 0
+  minTimeForChallenges: 5
+  minTimeBetweenChallenges: 5
+  challengesDone: 0
+  maxChallenges: 2
+  LoadingBar: {fileID: 665676929959221530}
   FloatersParent: {fileID: 1128004147}
   SpawnPoint: {fileID: 544772051}
   DespawnPoint: {fileID: 1489841931}
-  LoadingBar: {fileID: 665676929959221530}
   FilePrefab: {fileID: 3407921092754443628, guid: 41219596f30a7d549822c450ef9dcbf2, type: 3}
   GoldenFilePrefab: {fileID: 516318703637304511, guid: 684f39872c70ec640b94685c37ae8a24, type: 3}
   FolderPrefab: {fileID: 6943909189124828014, guid: fb4c6729352a386418b8bdc83459dc44, type: 3}
-  hackState: 0
   spawnInterval: 0.75
-  forceSpawnTreshold: 10
-  totalLoadTime: 15
-  currentLoadTime: 0
+  forceSpawnTreshold: 12
