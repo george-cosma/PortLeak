@@ -27,15 +27,23 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 
 		m_RectTransform = GetComponent<RectTransform>();
         WindowLabel.SetText(Title);
-        ExitButton.onClick.AddListener(TryExit);
+        ExitButton.onClick.AddListener(ExitButton_Clicked);
     }
 
 	protected virtual void Update() { }
 
-	public virtual void TryExit()
+	public virtual void ExitButton_Clicked()
 	{
-		Destroy(LinkedBarTask.gameObject);
-        Destroy(this.gameObject);
+		Exit();
+	}
+
+	public virtual void Exit()
+	{
+		if (LinkedBarTask != null)
+		{
+			Destroy(LinkedBarTask.gameObject);
+		}
+		Destroy(this.gameObject);
 	}
 
 	public virtual void OnDrag(PointerEventData eventData)
