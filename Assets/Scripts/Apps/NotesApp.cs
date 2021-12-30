@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class NotesApp : MonoBehaviour
 {
-    private static string notesText = "Do not forget to do the dishes...!";
+	//[SerializeField]
+	//protected Window LinkedWindow;
+
+	private static string notesText = "Do not forget to do the dishes...!";
 	private static List<NotesApp> notesApps = new List<NotesApp>();
 
     [SerializeField]

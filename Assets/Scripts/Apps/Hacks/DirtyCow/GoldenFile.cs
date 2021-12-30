@@ -5,9 +5,11 @@ using UnityEngine.EventSystems;
 
 public class GoldenFile : GenericFloater, IPointerClickHandler
 {
+	public DirtyCowApp app;
+
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		Debug.Log("Clicked");
+		app.ChallengeComplete();
 		Destroy(this.gameObject);
 	}
 }
