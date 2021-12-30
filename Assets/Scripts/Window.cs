@@ -48,9 +48,8 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 
 	public virtual void OnDrag(PointerEventData eventData)
 	{
-		OnPointerDown(eventData);
+		//Debug.Log($"{this.gameObject.name} => Selected: {eventData.selectedObject}, Used: {eventData.used}");
 		if(eventData.selectedObject != null) return;
-
 
 		// x pixel delta ...... ScreenHeight
 		// y pixel delta ...... canvasHeight
@@ -78,7 +77,6 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 	public virtual void OnPointerDown(PointerEventData eventData)
 	{
 		BringToFocus();
-		LinkedBarTask?.FocusRecieved();
 	}
 
 	public void RequestFocus()
@@ -88,7 +86,8 @@ public class Window : MonoBehaviour, IDragHandler, IPointerDownHandler
 
 	public void BringToFocus()
 	{
-		WindowManager.instance.AnnounceNewFocus(this);
 		Focused = true;
+		LinkedBarTask?.FocusRecieved();
+		WindowManager.instance.AnnounceNewFocus(this);
 	}
 }

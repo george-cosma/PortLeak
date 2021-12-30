@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 3861984329605824586}
   - component: {fileID: 3861984329605824587}
   - component: {fileID: 3861984329605824581}
+  - component: {fileID: 4495820257628470202}
   m_Layer: 5
   m_Name: Content
   m_TagString: WindowContent
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3861984329605824585}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -377,6 +378,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4495820257628470202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3861984329605824585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bbc05849b5a2b042afd4456a8e025f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinkedWindow: {fileID: 3861984330406607882}
 --- !u!1 &3861984330406607886
 GameObject:
   m_ObjectHideFlags: 0
