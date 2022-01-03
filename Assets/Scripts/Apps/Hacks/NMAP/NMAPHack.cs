@@ -8,7 +8,7 @@ public class NMAPHack : Hack
 	[Header("Loading Objects")]
 	[SerializeField]
 	protected Slider LoadingBar;
-
+	
 	// === Challenge Objects ===
 	[Header("Challenge Objects")]
 	[SerializeField]
