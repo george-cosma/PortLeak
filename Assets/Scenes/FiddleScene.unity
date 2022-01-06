@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caada8b325e841e45bdbd65d85b68a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindowPrefab: {fileID: 3861984330406607886, guid: 1f29d97f1a0ac7b449ed542e87ed9eb2, type: 3}
+  WindowPrefab: {fileID: 8109765503018345383, guid: c7656438dd022a54a9d977cd0dcca301, type: 3}
   BarTaskPrefab: {fileID: 6732329155728191269, guid: 79cb845e811cce14789f7339c9dae4f3, type: 3}
   DoubleClickIntreval: 1
 --- !u!1 &2061022579 stripped

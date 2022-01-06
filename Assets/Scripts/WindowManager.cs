@@ -20,6 +20,12 @@ public class WindowManager : ScriptableSingleton<WindowManager>
 	{
 		if (sender == m_focusedWindow) return;
 
+		foreach(Window window in m_windowsParent.GetComponentsInChildren<Window>())
+		{
+			if (window == sender) continue;
+			window.Focused = false;
+		}
+
 		m_focusedWindow = sender;
 		sender.transform.SetAsLastSibling();
 	}
