@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caada8b325e841e45bdbd65d85b68a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindowPrefab: {fileID: 3861984330406607886, guid: 1f29d97f1a0ac7b449ed542e87ed9eb2, type: 3}
+  WindowPrefab: {fileID: 2055849265119638960, guid: 6dc9e16f05fcf7b4ea59819256d0631e, type: 3}
   BarTaskPrefab: {fileID: 2471093112452479895, guid: 4cc63723fbe08db4ca4726678e3c6a73, type: 3}
   DoubleClickIntreval: 1
 --- !u!1001 &1320020365
