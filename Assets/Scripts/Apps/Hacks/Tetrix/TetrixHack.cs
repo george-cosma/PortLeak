@@ -41,6 +41,7 @@ public class TetrixHack : Hack
 	protected void Update()
 	{
 		if (!LinkedWindow.Focused) return;
+		if (hackState != HackState.CHALLENGE) return;
 
 		if (playableColumn_RectTransform.anchoredPosition.y >= -112)
 		{
