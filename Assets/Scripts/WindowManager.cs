@@ -30,6 +30,11 @@ public class WindowManager : ScriptableSingleton<WindowManager>
 		sender.transform.SetAsLastSibling();
 	}
 
+	public void BringToBack(Window sender)
+	{
+		sender.transform.SetAsFirstSibling();
+	}
+
 	public void CreateWindow(GameObject windowPrefab, GameObject barTaskPrefab)
 	{
 		Window window = Instantiate(windowPrefab, m_windowsParent).GetComponent<Window>();
